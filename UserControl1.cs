@@ -31,12 +31,12 @@ namespace MatrixGenerator
             {
                 currentMatrix = value;
                 #region 刷新视图操作
-                //如果当前矩阵视图设为null
+                //如果当前矩阵设为null
                 try
                 {
-                    int row_temp = value.Rows;//没有意义,只是为了确定value是否可引用(即不为null)
+                    int row_test = currentMatrix.Rows;
                     saveToolStripButton.Enabled = true;
-                    matrixDataGridView.ContextMenuStrip = tableContextMenuStrip;
+                    matrixDataGridView.ContextMenuStrip = tableContextMenuStrip; 
                 }
                 catch
                 {
@@ -51,7 +51,7 @@ namespace MatrixGenerator
                     }
                     saveToolStripButton.Enabled = false;
                     toolStripStatusLabel1.Text = "当前矩阵为null";
-                    return;
+                    return; 
                 }
                 //调整显示行数并加上行号
                 if (currentMatrix.Rows > matrixDataGridView.Rows.Count)
@@ -69,33 +69,33 @@ namespace MatrixGenerator
                     {
                         matrixDataGridView.Columns.Add("Column" + Convert.ToString(i), "C" + Convert.ToString(i));
                         matrixDataGridView.Columns[i - 1].SortMode = DataGridViewColumnSortMode.NotSortable;//使列不可排序
+                        if (i > 654)
+                        {
+                            break;
+                        }
                     }
                 }
-                //先将每一个单元格清空并进行相应的处理
-                for (int i = 0; i < matrixDataGridView.Rows.Count; i++)
+                //只刷新显示部分
+                int first_rowIndex = matrixDataGridView.FirstDisplayedScrollingRowIndex;
+                int first_colIndex = matrixDataGridView.FirstDisplayedScrollingColumnIndex;
+                int row_display_count = matrixDataGridView.DisplayedRowCount(true);
+                int col_display_count = matrixDataGridView.DisplayedColumnCount(true);
+                for (int i = 0; i < row_display_count; i++)
                 {
-                    for (int j = 0; j < matrixDataGridView.Columns.Count; j++)
+                    for (int j = 0; j < col_display_count; j++)
                     {
-                        if ((string)matrixDataGridView[j, i].Value != "")
+                        int row = i + first_rowIndex;
+                        int col = j + first_colIndex;
+                        if (row >= 0 && row < currentMatrix.Rows && col >= 0 && col < currentMatrix.Columns)
                         {
-                            matrixDataGridView[j, i].Value = "";
-                        }
-                        if (i >= currentMatrix.Rows || j >= currentMatrix.Columns)
-                        {
-                            matrixDataGridView[j, i].ReadOnly = true;
+                            matrixDataGridView[col, row].Value = currentMatrix[row, col].ToString();
+                            matrixDataGridView[col, row].ReadOnly = false;
                         }
                         else
                         {
-                            matrixDataGridView[j, i].ReadOnly = false;
+                            matrixDataGridView[col, row].Value = "";
+                            matrixDataGridView[col, row].ReadOnly = true;
                         }
-                    }
-                }
-                //将当前矩阵值显示在表格中
-                for (int i = 0; i < currentMatrix.Rows; i++)
-                {
-                    for (int j = 0; j < currentMatrix.Columns; j++)
-                    {
-                        matrixDataGridView[j, i].Value = Convert.ToString(currentMatrix[i, j]);
                     }
                 }
                 #endregion
@@ -136,7 +136,7 @@ namespace MatrixGenerator
         public MatrixGenerator()
         {
             InitializeComponent();
-            CurrentMatrix = Matrix.Ones(5);
+            CurrentMatrix = Matrix.Ones(4);
             CurrentMatrix = null;
             funcToolStripComboBox.SelectedIndex = 0;
             toolStripStatusLabel1.Text = "就绪...";
@@ -164,32 +164,46 @@ namespace MatrixGenerator
                     #region case1
                     paraToolStrip.Items.Add(new ToolStripLabel("起始值:"));
                     ToolStripTextBox temp = new ToolStripTextBox();
-                    temp.TextBox.Width = 40;
+                    temp.TextBox.Width = 45;
                     paraToolStrip.Items.Add(temp);
                     paraToolStrip.Items.Add(new ToolStripLabel("终止值:"));
                     temp = new ToolStripTextBox();
-                    temp.TextBox.Width = 40;
+                    temp.TextBox.Width = 45;
                     paraToolStrip.Items.Add(temp);
                     paraToolStrip.Items.Add(new ToolStripLabel("分段数:"));
                     temp = new ToolStripTextBox();
-                    temp.TextBox.Width = 40;
+                    temp.TextBox.Width = 45;
                     paraToolStrip.Items.Add(temp);
+                    CheckBox toCol_Set = new CheckBox();
+                    toCol_Set.Checked = true;
+                    checkedState = true;
+                    toCol_Set.CheckedChanged += new EventHandler(this.Reset_case1_checkedChanged);
+                    ToolStripControlHost host1 = new ToolStripControlHost(toCol_Set);
+                    paraToolStrip.Items.Add(host1);
+                    paraToolStrip.Items.Add(new ToolStripLabel("转置"));
                     break;//Linspace
                     #endregion
                 case 2:
                     #region case2
                     paraToolStrip.Items.Add(new ToolStripLabel("起始值:"));
                     ToolStripTextBox temp2 = new ToolStripTextBox();
-                    temp2.TextBox.Width = 40;
+                    temp2.TextBox.Width = 45;
                     paraToolStrip.Items.Add(temp2);
                     paraToolStrip.Items.Add(new ToolStripLabel("终止值:"));
                     temp2 = new ToolStripTextBox();
-                    temp2.TextBox.Width = 40;
+                    temp2.TextBox.Width = 45;
                     paraToolStrip.Items.Add(temp2);
                     paraToolStrip.Items.Add(new ToolStripLabel("分段数:"));
                     temp2 = new ToolStripTextBox();
-                    temp2.TextBox.Width = 40;
+                    temp2.TextBox.Width = 45;
                     paraToolStrip.Items.Add(temp2);
+                    CheckBox toCol_Set2 = new CheckBox();
+                    toCol_Set2.Checked = true;
+                    checkedState = true;
+                    toCol_Set2.CheckedChanged += new EventHandler(this.Reset_case1_checkedChanged);
+                    ToolStripControlHost host2 = new ToolStripControlHost(toCol_Set2);
+                    paraToolStrip.Items.Add(host2);
+                    paraToolStrip.Items.Add(new ToolStripLabel("转置"));
                     break;//Logspace
                     #endregion
                 case 3:
@@ -252,6 +266,13 @@ namespace MatrixGenerator
                     temp5=new ToolStripTextBox();
                     temp5.TextBox.Width=50;
                     paraToolStrip.Items.Add(temp5);
+                    CheckBox toCol_Set5 = new CheckBox();
+                    toCol_Set5.Checked = true;
+                    checkedState = true;
+                    toCol_Set5.CheckedChanged += new EventHandler(this.Reset_case1_checkedChanged);
+                    ToolStripControlHost host5 = new ToolStripControlHost(toCol_Set5);
+                    paraToolStrip.Items.Add(host5);
+                    paraToolStrip.Items.Add(new ToolStripLabel("转置"));
                     break;//RangeVector
                     #endregion
                 case 6:
@@ -523,7 +544,12 @@ namespace MatrixGenerator
                     }
                     try
                     {
-                        CurrentMatrix = Matrix.LinspaceVector(begin, end, num);
+                        Matrix tempM = Matrix.LinspaceVector(begin, end, num);
+                        if (checkedState)
+                        {
+                            tempM=Matrix.Transfer(tempM);
+                        }
+                        CurrentMatrix = tempM;
                         toolStripStatusLabel1.Text = "已生成线性空间向量";
                     }
                     catch
@@ -549,7 +575,12 @@ namespace MatrixGenerator
                     }
                     try
                     {
-                        CurrentMatrix = Matrix.LogspaceVector(begin2, end2, num2);
+                        Matrix tempM = Matrix.LogspaceVector(begin2, end2, num2);
+                        if (checkedState)
+                        {
+                            tempM = Matrix.Transfer(tempM);
+                        }
+                        CurrentMatrix = tempM;
                         toolStripStatusLabel1.Text = "已生成线性空间向量";
                     }
                     catch
@@ -565,6 +596,10 @@ namespace MatrixGenerator
                     {
                         row = Convert.ToInt32(paraToolStrip.Items[2].Text);
                         col = Convert.ToInt32(paraToolStrip.Items[4].Text);
+                        if (row <= 0 || col <= 0)
+                        {
+                            throw new Exception();
+                        }
                     }
                     catch
                     {
@@ -592,6 +627,10 @@ namespace MatrixGenerator
                         col4 = Convert.ToInt32(paraToolStrip.Items[4].Text);
                         min = Convert.ToDouble(paraToolStrip.Items[8].Text);
                         max = Convert.ToDouble(paraToolStrip.Items[10].Text);
+                        if (row4 <= 0 || col4 <= 0)
+                        {
+                            throw new Exception();
+                        }
                     }
                     catch
                     {
@@ -625,7 +664,12 @@ namespace MatrixGenerator
                     }
                     try
                     {
-                        CurrentMatrix = Matrix.RangeVector(begin5, incre, end5);
+                        Matrix tempM = Matrix.RangeVector(begin5, incre, end5);
+                        if (checkedState)
+                        {
+                            tempM = Matrix.Transfer(tempM);
+                        }
+                        CurrentMatrix = tempM;
                         toolStripStatusLabel1.Text = "已生成递增(减)向量";
                     }
                     catch
@@ -1478,6 +1522,19 @@ namespace MatrixGenerator
             }
         }
         //参数工具栏控件的事件监听
+        private void Reset_case1_checkedChanged(object sender, EventArgs e)
+        {
+            CheckBox sender_obj = (CheckBox)sender;
+            checkedState = sender_obj.Checked;
+            if (!checkedState)
+            {
+                toolStripStatusLabel1.Text = "生成行向量效率将远低于列向量,且只显示655列";
+            }
+            else
+            {
+                toolStripStatusLabel1.Text = "";
+            }
+        }
         private void Reset_case3_checkedChanged(object sender, EventArgs e)
         {
             CheckBox sender_obj = (CheckBox)sender;
@@ -1503,74 +1560,6 @@ namespace MatrixGenerator
             checkedState = sender_obj.Checked;
         }
         #endregion
-
-        private void actionToolStripButton_Click(object sender, EventArgs e)
-        {
-            PerformFunction();
-        }
-
-        private void saveToolStripButton_Click(object sender, EventArgs e)
-        {
-            workspaceToolStripDropDownButton.DropDownItems.Add("矩阵" + Convert.ToString(workspace.Count));
-            workspace.Add(new Matrix(currentMatrix));
-            workspaceToolStripDropDownButton.DropDownItems[workspaceToolStripDropDownButton.DropDownItems.Count - 1].Click 
-                += new System.EventHandler(this.toolStripMenuItem2_Click);//增加事件处理
-            toolStripStatusLabel1.Text = "当前矩阵" + Convert.ToString(workspace.Count - 1) + "已存入工作空间...";
-        }
-
-        private void funcToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            funcIndex = funcToolStripComboBox.SelectedIndex;
-            this.ResetParaToolStrip();
-            this.FunctionTip();
-        }
-
-        //编辑结束后要更改相应数据
-        private void matrixDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            int row_num = e.RowIndex;
-            int col_num = e.ColumnIndex;
-            string cell_Text = (string)matrixDataGridView[col_num, row_num].Value;
-            double changedVal;
-            try
-            {
-                changedVal = Convert.ToDouble(cell_Text);
-                currentMatrix[row_num, col_num] = changedVal;
-                toolStripStatusLabel1.Text = "第" + Convert.ToString(row_num + 1) + "行、第" + Convert.ToString(col_num + 1) +
-                                                "列元素变更为" + Convert.ToString(currentMatrix[row_num, col_num]);
-            }
-            catch
-            {
-                changedVal = currentMatrix[row_num, col_num];
-                matrixDataGridView[col_num, row_num].Value = Convert.ToString(changedVal);
-                toolStripStatusLabel1.Text = "元素更改错误,输入只能为数字!";
-            }
-        }
-
-        private void clearToolStripButton_Click(object sender, EventArgs e)
-        {
-            int num_items=workspaceToolStripDropDownButton.DropDownItems.Count;
-            for (int i = 0; i < num_items; i++)
-            {
-                workspaceToolStripDropDownButton.DropDownItems.RemoveAt(0);
-            }
-            workspace.RemoveRange(0, workspace.Count);
-            SelectedIndex = -1;//取消选中
-            toolStripStatusLabel1.Text = "工作空间已清空...";
-        }
-
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem sender_obj = (ToolStripMenuItem)sender;
-            for (int i = 0; i < workspace.Count; i++)
-            {
-                if (sender_obj == workspaceToolStripDropDownButton.DropDownItems[i])
-                {
-                    SelectedIndex = i;
-                    break;
-                }
-            }
-        }
 
         #region 上下文菜单响应
         private void rowAssimilateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1822,6 +1811,129 @@ namespace MatrixGenerator
                 CurrentMatrix = matrix_temp;
             }
         }
+
+        private void getRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int row_sel, col_sel;
+            row_sel = matrixDataGridView.CurrentCell.RowIndex;
+            col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
+            Matrix matrix_temp = new Matrix(CurrentMatrix);
+            if (row_sel >= 0 && row_sel < CurrentMatrix.Rows && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
+            {
+                matrix_temp = Matrix.GetRowVector(matrix_temp, row_sel);
+                CurrentMatrix = matrix_temp;
+            }
+        }
+
+        private void getColToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int row_sel, col_sel;
+            row_sel = matrixDataGridView.CurrentCell.RowIndex;
+            col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
+            Matrix matrix_temp = new Matrix(CurrentMatrix);
+            if (row_sel >= 0 && row_sel < CurrentMatrix.Rows && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
+            {
+                matrix_temp = Matrix.GetColVector(matrix_temp, col_sel);
+                CurrentMatrix = matrix_temp;
+            }
+        }
         #endregion
+
+        private void actionToolStripButton_Click(object sender, EventArgs e)
+        {
+            PerformFunction();
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            workspaceToolStripDropDownButton.DropDownItems.Add("矩阵" + Convert.ToString(workspace.Count));
+            workspace.Add(new Matrix(currentMatrix));
+            workspaceToolStripDropDownButton.DropDownItems[workspaceToolStripDropDownButton.DropDownItems.Count - 1].Click 
+                += new System.EventHandler(this.toolStripMenuItem2_Click);//增加事件处理
+            toolStripStatusLabel1.Text = "当前矩阵" + Convert.ToString(workspace.Count - 1) + "已存入工作空间...";
+        }
+
+        private void funcToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            funcIndex = funcToolStripComboBox.SelectedIndex;
+            this.ResetParaToolStrip();
+            this.FunctionTip();
+        }
+
+        //编辑结束后要更改相应数据
+        private void matrixDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int row_num = e.RowIndex;
+            int col_num = e.ColumnIndex;
+            string cell_Text = (string)matrixDataGridView[col_num, row_num].Value;
+            double changedVal;
+            try
+            {
+                changedVal = Convert.ToDouble(cell_Text);
+                currentMatrix[row_num, col_num] = changedVal;
+                toolStripStatusLabel1.Text = "第" + Convert.ToString(row_num + 1) + "行、第" + Convert.ToString(col_num + 1) +
+                                                "列元素变更为" + Convert.ToString(currentMatrix[row_num, col_num]);
+            }
+            catch
+            {
+                changedVal = currentMatrix[row_num, col_num];
+                matrixDataGridView[col_num, row_num].Value = Convert.ToString(changedVal);
+                toolStripStatusLabel1.Text = "元素更改错误,输入只能为数字!";
+            }
+        }
+
+        private void clearToolStripButton_Click(object sender, EventArgs e)
+        {
+            int num_items=workspaceToolStripDropDownButton.DropDownItems.Count;
+            for (int i = 0; i < num_items; i++)
+            {
+                workspaceToolStripDropDownButton.DropDownItems.RemoveAt(0);
+            }
+            workspace.RemoveRange(0, workspace.Count);
+            SelectedIndex = -1;//取消选中
+            toolStripStatusLabel1.Text = "工作空间已清空...";
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem sender_obj = (ToolStripMenuItem)sender;
+            for (int i = 0; i < workspace.Count; i++)
+            {
+                if (sender_obj == workspaceToolStripDropDownButton.DropDownItems[i])
+                {
+                    SelectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        private void matrixDataGridView_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (currentMatrix == null)
+                return;
+            int first_rowIndex = matrixDataGridView.FirstDisplayedScrollingRowIndex;
+            int first_colIndex = matrixDataGridView.FirstDisplayedScrollingColumnIndex;
+            int row_display_count = matrixDataGridView.DisplayedRowCount(true);
+            int col_display_count = matrixDataGridView.DisplayedColumnCount(true);
+            for (int i = 0; i < row_display_count; i++)
+            {
+                for (int j = 0; j < col_display_count; j++)
+                {
+                    int row = i + first_rowIndex;
+                    int col = j + first_colIndex;
+                    if (row >= 0 && row < currentMatrix.Rows && col >= 0 && col < currentMatrix.Columns)
+                    {
+                        matrixDataGridView[col, row].Value = currentMatrix[row, col].ToString();
+                        matrixDataGridView[col, row].ReadOnly = false;
+                    }
+                    else
+                    {
+                        matrixDataGridView[col, row].Value = "";
+                        matrixDataGridView[col, row].ReadOnly = true;
+                    }
+                }
+            }
+        }
+
     }
 }

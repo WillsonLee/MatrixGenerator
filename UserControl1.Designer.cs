@@ -39,6 +39,10 @@
             this.paraToolStrip = new System.Windows.Forms.ToolStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.matrixDataGridView = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.rowAssimilateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colAssimilateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,10 +69,13 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.workspaceToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.getRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getColToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.funcToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.matrixDataGridView)).BeginInit();
@@ -228,11 +235,36 @@
             this.matrixDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.matrixDataGridView.Location = new System.Drawing.Point(0, 0);
             this.matrixDataGridView.Name = "matrixDataGridView";
-            this.matrixDataGridView.RowHeadersWidth = 55;
+            this.matrixDataGridView.RowHeadersWidth = 70;
             this.matrixDataGridView.RowTemplate.Height = 23;
             this.matrixDataGridView.Size = new System.Drawing.Size(352, 179);
             this.matrixDataGridView.TabIndex = 1;
             this.matrixDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.matrixDataGridView_CellEndEdit);
+            this.matrixDataGridView.Scroll += new System.Windows.Forms.ScrollEventHandler(this.matrixDataGridView_Scroll);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "C1";
+            this.Column1.Name = "Column1";
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "C2";
+            this.Column2.Name = "Column2";
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "C3";
+            this.Column3.Name = "Column3";
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "C4";
+            this.Column4.Name = "Column4";
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // tableContextMenuStrip
             // 
@@ -246,28 +278,30 @@
             this.rowAddToolStripMenuItem,
             this.colAddToolStripMenuItem,
             this.deleteRowToolStripMenuItem,
-            this.deleteColToolStripMenuItem});
+            this.deleteColToolStripMenuItem,
+            this.getRowToolStripMenuItem,
+            this.getColToolStripMenuItem});
             this.tableContextMenuStrip.Name = "tableContextMenuStrip";
-            this.tableContextMenuStrip.Size = new System.Drawing.Size(145, 192);
+            this.tableContextMenuStrip.Size = new System.Drawing.Size(153, 258);
             // 
             // rowAssimilateToolStripMenuItem
             // 
             this.rowAssimilateToolStripMenuItem.Name = "rowAssimilateToolStripMenuItem";
-            this.rowAssimilateToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.rowAssimilateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rowAssimilateToolStripMenuItem.Text = "同化整行";
             this.rowAssimilateToolStripMenuItem.Click += new System.EventHandler(this.rowAssimilateToolStripMenuItem_Click);
             // 
             // colAssimilateToolStripMenuItem
             // 
             this.colAssimilateToolStripMenuItem.Name = "colAssimilateToolStripMenuItem";
-            this.colAssimilateToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.colAssimilateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colAssimilateToolStripMenuItem.Text = "同化整列";
             this.colAssimilateToolStripMenuItem.Click += new System.EventHandler(this.colAssimilateToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(141, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // copyToolStripMenuItem
             // 
@@ -277,34 +311,34 @@
             this.cellGoLeftToolStripMenuItem,
             this.cellGoRightToolStripMenuItem});
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.copyToolStripMenuItem.Text = "复制";
             // 
             // cellGoUpToolStripMenuItem
             // 
             this.cellGoUpToolStripMenuItem.Name = "cellGoUpToolStripMenuItem";
-            this.cellGoUpToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.cellGoUpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cellGoUpToolStripMenuItem.Text = "向上复制";
             this.cellGoUpToolStripMenuItem.Click += new System.EventHandler(this.cellGoUpToolStripMenuItem_Click);
             // 
             // cellGoDownToolStripMenuItem
             // 
             this.cellGoDownToolStripMenuItem.Name = "cellGoDownToolStripMenuItem";
-            this.cellGoDownToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.cellGoDownToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cellGoDownToolStripMenuItem.Text = "向下复制";
             this.cellGoDownToolStripMenuItem.Click += new System.EventHandler(this.cellGoDownToolStripMenuItem_Click);
             // 
             // cellGoLeftToolStripMenuItem
             // 
             this.cellGoLeftToolStripMenuItem.Name = "cellGoLeftToolStripMenuItem";
-            this.cellGoLeftToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.cellGoLeftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cellGoLeftToolStripMenuItem.Text = "向左复制";
             this.cellGoLeftToolStripMenuItem.Click += new System.EventHandler(this.cellGoLeftToolStripMenuItem_Click);
             // 
             // cellGoRightToolStripMenuItem
             // 
             this.cellGoRightToolStripMenuItem.Name = "cellGoRightToolStripMenuItem";
-            this.cellGoRightToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.cellGoRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cellGoRightToolStripMenuItem.Text = "向右复制";
             this.cellGoRightToolStripMenuItem.Click += new System.EventHandler(this.cellGoRightToolStripMenuItem_Click);
             // 
@@ -316,41 +350,41 @@
             this.colGoLeftToolStripMenuItem,
             this.colGoRightToolStripMenuItem});
             this.copyRowColToolStripMenuItem.Name = "copyRowColToolStripMenuItem";
-            this.copyRowColToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.copyRowColToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.copyRowColToolStripMenuItem.Text = "整行(列)复制";
             // 
             // rowGoUpToolStripMenuItem
             // 
             this.rowGoUpToolStripMenuItem.Name = "rowGoUpToolStripMenuItem";
-            this.rowGoUpToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.rowGoUpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rowGoUpToolStripMenuItem.Text = "整行向上复制";
             this.rowGoUpToolStripMenuItem.Click += new System.EventHandler(this.rowGoUpToolStripMenuItem_Click);
             // 
             // rowGoDownToolStripMenuItem
             // 
             this.rowGoDownToolStripMenuItem.Name = "rowGoDownToolStripMenuItem";
-            this.rowGoDownToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.rowGoDownToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rowGoDownToolStripMenuItem.Text = "整行向下复制";
             this.rowGoDownToolStripMenuItem.Click += new System.EventHandler(this.rowGoDownToolStripMenuItem_Click);
             // 
             // colGoLeftToolStripMenuItem
             // 
             this.colGoLeftToolStripMenuItem.Name = "colGoLeftToolStripMenuItem";
-            this.colGoLeftToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.colGoLeftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colGoLeftToolStripMenuItem.Text = "整列向左复制";
             this.colGoLeftToolStripMenuItem.Click += new System.EventHandler(this.colGoLeftToolStripMenuItem_Click);
             // 
             // colGoRightToolStripMenuItem
             // 
             this.colGoRightToolStripMenuItem.Name = "colGoRightToolStripMenuItem";
-            this.colGoRightToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.colGoRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colGoRightToolStripMenuItem.Text = "整列向右复制";
             this.colGoRightToolStripMenuItem.Click += new System.EventHandler(this.colGoRightToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(141, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
             // 
             // rowAddToolStripMenuItem
             // 
@@ -358,20 +392,20 @@
             this.upAddToolStripMenuItem,
             this.belowAddToolStripMenuItem});
             this.rowAddToolStripMenuItem.Name = "rowAddToolStripMenuItem";
-            this.rowAddToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.rowAddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rowAddToolStripMenuItem.Text = "插入行";
             // 
             // upAddToolStripMenuItem
             // 
             this.upAddToolStripMenuItem.Name = "upAddToolStripMenuItem";
-            this.upAddToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.upAddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.upAddToolStripMenuItem.Text = "上方插入";
             this.upAddToolStripMenuItem.Click += new System.EventHandler(this.upAddToolStripMenuItem_Click);
             // 
             // belowAddToolStripMenuItem
             // 
             this.belowAddToolStripMenuItem.Name = "belowAddToolStripMenuItem";
-            this.belowAddToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.belowAddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.belowAddToolStripMenuItem.Text = "下方插入";
             this.belowAddToolStripMenuItem.Click += new System.EventHandler(this.belowAddToolStripMenuItem_Click);
             // 
@@ -381,34 +415,34 @@
             this.leftAddToolStripMenuItem,
             this.rightAddToolStripMenuItem});
             this.colAddToolStripMenuItem.Name = "colAddToolStripMenuItem";
-            this.colAddToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.colAddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colAddToolStripMenuItem.Text = "插入列";
             // 
             // leftAddToolStripMenuItem
             // 
             this.leftAddToolStripMenuItem.Name = "leftAddToolStripMenuItem";
-            this.leftAddToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.leftAddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.leftAddToolStripMenuItem.Text = "左边插入";
             this.leftAddToolStripMenuItem.Click += new System.EventHandler(this.leftAddToolStripMenuItem_Click);
             // 
             // rightAddToolStripMenuItem
             // 
             this.rightAddToolStripMenuItem.Name = "rightAddToolStripMenuItem";
-            this.rightAddToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.rightAddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rightAddToolStripMenuItem.Text = "右边插入";
             this.rightAddToolStripMenuItem.Click += new System.EventHandler(this.rightAddToolStripMenuItem_Click);
             // 
             // deleteRowToolStripMenuItem
             // 
             this.deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
-            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteRowToolStripMenuItem.Text = "删除整行";
             this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
             // 
             // deleteColToolStripMenuItem
             // 
             this.deleteColToolStripMenuItem.Name = "deleteColToolStripMenuItem";
-            this.deleteColToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.deleteColToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteColToolStripMenuItem.Text = "删除整列";
             this.deleteColToolStripMenuItem.Click += new System.EventHandler(this.deleteColToolStripMenuItem_Click);
             // 
@@ -439,29 +473,55 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 18);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
-            // Column1
+            // BottomToolStripPanel
             // 
-            this.Column1.HeaderText = "C1";
-            this.Column1.Name = "Column1";
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.BottomToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.BottomToolStripPanel.Name = "BottomToolStripPanel";
+            this.BottomToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.BottomToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.BottomToolStripPanel.Size = new System.Drawing.Size(0, 0);
             // 
-            // Column2
+            // TopToolStripPanel
             // 
-            this.Column2.HeaderText = "C2";
-            this.Column2.Name = "Column2";
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.TopToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopToolStripPanel.Name = "TopToolStripPanel";
+            this.TopToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.TopToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.TopToolStripPanel.Size = new System.Drawing.Size(0, 0);
             // 
-            // Column3
+            // RightToolStripPanel
             // 
-            this.Column3.HeaderText = "C3";
-            this.Column3.Name = "Column3";
-            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.RightToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.RightToolStripPanel.Name = "RightToolStripPanel";
+            this.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.RightToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.RightToolStripPanel.Size = new System.Drawing.Size(0, 0);
             // 
-            // Column4
+            // LeftToolStripPanel
             // 
-            this.Column4.HeaderText = "C4";
-            this.Column4.Name = "Column4";
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LeftToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.LeftToolStripPanel.Name = "LeftToolStripPanel";
+            this.LeftToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.LeftToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.LeftToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // ContentPanel
+            // 
+            this.ContentPanel.Size = new System.Drawing.Size(352, 177);
+            // 
+            // getRowToolStripMenuItem
+            // 
+            this.getRowToolStripMenuItem.Name = "getRowToolStripMenuItem";
+            this.getRowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.getRowToolStripMenuItem.Text = "仅留当前行";
+            this.getRowToolStripMenuItem.Click += new System.EventHandler(this.getRowToolStripMenuItem_Click);
+            // 
+            // getColToolStripMenuItem
+            // 
+            this.getColToolStripMenuItem.Name = "getColToolStripMenuItem";
+            this.getColToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.getColToolStripMenuItem.Text = "仅留当前列";
+            this.getColToolStripMenuItem.Click += new System.EventHandler(this.getColToolStripMenuItem_Click);
             // 
             // MatrixGenerator
             // 
@@ -495,7 +555,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.DataGridView matrixDataGridView;
         private System.Windows.Forms.ToolStripButton actionToolStripButton;
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripDropDownButton workspaceToolStripDropDownButton;
@@ -524,10 +583,18 @@
         private System.Windows.Forms.ToolStripMenuItem rightAddToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteColToolStripMenuItem;
+        private System.Windows.Forms.DataGridView matrixDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
+        private System.Windows.Forms.ToolStripContentPanel ContentPanel;
+        private System.Windows.Forms.ToolStripMenuItem getRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem getColToolStripMenuItem;
 
     }
 }
