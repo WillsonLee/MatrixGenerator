@@ -1,0 +1,11 @@
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\bin\Debug\MatrixGenerator.dll
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\bin\Debug\MatrixGenerator.pdb
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\bin\Debug\Matrix.dll
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\bin\Debug\Matrix.pdb
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\bin\Debug\Matrix.xml
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\obj\Debug\MatrixGenerator.csprojResolveAssemblyReference.cache
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\obj\Debug\MatrixGenerator.csproj.GenerateResource.Cache
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\obj\Debug\MatrixGenerator.dll
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\obj\Debug\MatrixGenerator.pdb
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\obj\Debug\MatrixGenerator.MatrixGenerator.resources
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\bin\Debug\MatrixGenerator.XML

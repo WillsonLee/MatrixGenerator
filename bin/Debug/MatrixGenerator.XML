@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MatrixGenerator</name>
+    </assembly>
+    <members>
+        <member name="T:MatrixGenerator.MatrixGenerator">
+            <summary>
+            矩阵生成器类
+            </summary>
+        </member>
+        <member name="M:MatrixGenerator.MatrixGenerator.#ctor">
+            <summary>
+            构造一个矩阵生成器对象
+            </summary>
+        </member>
+        <member name="F:MatrixGenerator.MatrixGenerator.components">
+            <summary>
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:MatrixGenerator.MatrixGenerator.Dispose(System.Boolean)">
+            <summary>
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:MatrixGenerator.MatrixGenerator.InitializeComponent">
+            <summary>
+            设计器支持所需的方法 - 不要
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="P:MatrixGenerator.MatrixGenerator.CurrentMatrix">
+            <summary>
+            当前的矩阵
+            </summary>
+        </member>
+        <member name="P:MatrixGenerator.MatrixGenerator.SelectedIndex">
+            <summary>
+            选中工作空间的矩阵序号
+            </summary>
+        </member>
+        <member name="P:MatrixGenerator.MatrixGenerator.Workspace">
+            <summary>
+            工作空间中的变量(只读)
+            </summary>
+        </member>
+    </members>
+</doc>
