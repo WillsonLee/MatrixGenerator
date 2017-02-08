@@ -76,6 +76,11 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.moveRowColToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rowMoveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RowMoveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colMoveLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colMoveRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.funcToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.matrixDataGridView)).BeginInit();
@@ -275,6 +280,7 @@
             this.toolStripMenuItem1,
             this.copyToolStripMenuItem,
             this.copyRowColToolStripMenuItem,
+            this.moveRowColToolStripMenuItem,
             this.toolStripMenuItem2,
             this.rowAddToolStripMenuItem,
             this.colAddToolStripMenuItem,
@@ -283,26 +289,26 @@
             this.getRowToolStripMenuItem,
             this.getColToolStripMenuItem});
             this.tableContextMenuStrip.Name = "tableContextMenuStrip";
-            this.tableContextMenuStrip.Size = new System.Drawing.Size(145, 236);
+            this.tableContextMenuStrip.Size = new System.Drawing.Size(153, 280);
             // 
             // rowAssimilateToolStripMenuItem
             // 
             this.rowAssimilateToolStripMenuItem.Name = "rowAssimilateToolStripMenuItem";
-            this.rowAssimilateToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.rowAssimilateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rowAssimilateToolStripMenuItem.Text = "同化整行";
             this.rowAssimilateToolStripMenuItem.Click += new System.EventHandler(this.rowAssimilateToolStripMenuItem_Click);
             // 
             // colAssimilateToolStripMenuItem
             // 
             this.colAssimilateToolStripMenuItem.Name = "colAssimilateToolStripMenuItem";
-            this.colAssimilateToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.colAssimilateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colAssimilateToolStripMenuItem.Text = "同化整列";
             this.colAssimilateToolStripMenuItem.Click += new System.EventHandler(this.colAssimilateToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(141, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // copyToolStripMenuItem
             // 
@@ -312,34 +318,34 @@
             this.cellGoLeftToolStripMenuItem,
             this.cellGoRightToolStripMenuItem});
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.copyToolStripMenuItem.Text = "复制";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Text = "单元格复制";
             // 
             // cellGoUpToolStripMenuItem
             // 
             this.cellGoUpToolStripMenuItem.Name = "cellGoUpToolStripMenuItem";
-            this.cellGoUpToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.cellGoUpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cellGoUpToolStripMenuItem.Text = "向上复制";
             this.cellGoUpToolStripMenuItem.Click += new System.EventHandler(this.cellGoUpToolStripMenuItem_Click);
             // 
             // cellGoDownToolStripMenuItem
             // 
             this.cellGoDownToolStripMenuItem.Name = "cellGoDownToolStripMenuItem";
-            this.cellGoDownToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.cellGoDownToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cellGoDownToolStripMenuItem.Text = "向下复制";
             this.cellGoDownToolStripMenuItem.Click += new System.EventHandler(this.cellGoDownToolStripMenuItem_Click);
             // 
             // cellGoLeftToolStripMenuItem
             // 
             this.cellGoLeftToolStripMenuItem.Name = "cellGoLeftToolStripMenuItem";
-            this.cellGoLeftToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.cellGoLeftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cellGoLeftToolStripMenuItem.Text = "向左复制";
             this.cellGoLeftToolStripMenuItem.Click += new System.EventHandler(this.cellGoLeftToolStripMenuItem_Click);
             // 
             // cellGoRightToolStripMenuItem
             // 
             this.cellGoRightToolStripMenuItem.Name = "cellGoRightToolStripMenuItem";
-            this.cellGoRightToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.cellGoRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cellGoRightToolStripMenuItem.Text = "向右复制";
             this.cellGoRightToolStripMenuItem.Click += new System.EventHandler(this.cellGoRightToolStripMenuItem_Click);
             // 
@@ -351,41 +357,41 @@
             this.colGoLeftToolStripMenuItem,
             this.colGoRightToolStripMenuItem});
             this.copyRowColToolStripMenuItem.Name = "copyRowColToolStripMenuItem";
-            this.copyRowColToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.copyRowColToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.copyRowColToolStripMenuItem.Text = "整行(列)复制";
             // 
             // rowGoUpToolStripMenuItem
             // 
             this.rowGoUpToolStripMenuItem.Name = "rowGoUpToolStripMenuItem";
-            this.rowGoUpToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.rowGoUpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rowGoUpToolStripMenuItem.Text = "整行向上复制";
             this.rowGoUpToolStripMenuItem.Click += new System.EventHandler(this.rowGoUpToolStripMenuItem_Click);
             // 
             // rowGoDownToolStripMenuItem
             // 
             this.rowGoDownToolStripMenuItem.Name = "rowGoDownToolStripMenuItem";
-            this.rowGoDownToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.rowGoDownToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rowGoDownToolStripMenuItem.Text = "整行向下复制";
             this.rowGoDownToolStripMenuItem.Click += new System.EventHandler(this.rowGoDownToolStripMenuItem_Click);
             // 
             // colGoLeftToolStripMenuItem
             // 
             this.colGoLeftToolStripMenuItem.Name = "colGoLeftToolStripMenuItem";
-            this.colGoLeftToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.colGoLeftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colGoLeftToolStripMenuItem.Text = "整列向左复制";
             this.colGoLeftToolStripMenuItem.Click += new System.EventHandler(this.colGoLeftToolStripMenuItem_Click);
             // 
             // colGoRightToolStripMenuItem
             // 
             this.colGoRightToolStripMenuItem.Name = "colGoRightToolStripMenuItem";
-            this.colGoRightToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.colGoRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colGoRightToolStripMenuItem.Text = "整列向右复制";
             this.colGoRightToolStripMenuItem.Click += new System.EventHandler(this.colGoRightToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(141, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
             // 
             // rowAddToolStripMenuItem
             // 
@@ -393,7 +399,7 @@
             this.upAddToolStripMenuItem,
             this.belowAddToolStripMenuItem});
             this.rowAddToolStripMenuItem.Name = "rowAddToolStripMenuItem";
-            this.rowAddToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.rowAddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rowAddToolStripMenuItem.Text = "插入行";
             // 
             // upAddToolStripMenuItem
@@ -416,7 +422,7 @@
             this.leftAddToolStripMenuItem,
             this.rightAddToolStripMenuItem});
             this.colAddToolStripMenuItem.Name = "colAddToolStripMenuItem";
-            this.colAddToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.colAddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colAddToolStripMenuItem.Text = "插入列";
             // 
             // leftAddToolStripMenuItem
@@ -436,28 +442,28 @@
             // deleteRowToolStripMenuItem
             // 
             this.deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
-            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteRowToolStripMenuItem.Text = "删除整行";
             this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
             // 
             // deleteColToolStripMenuItem
             // 
             this.deleteColToolStripMenuItem.Name = "deleteColToolStripMenuItem";
-            this.deleteColToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.deleteColToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteColToolStripMenuItem.Text = "删除整列";
             this.deleteColToolStripMenuItem.Click += new System.EventHandler(this.deleteColToolStripMenuItem_Click);
             // 
             // getRowToolStripMenuItem
             // 
             this.getRowToolStripMenuItem.Name = "getRowToolStripMenuItem";
-            this.getRowToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.getRowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.getRowToolStripMenuItem.Text = "仅留当前行";
             this.getRowToolStripMenuItem.Click += new System.EventHandler(this.getRowToolStripMenuItem_Click);
             // 
             // getColToolStripMenuItem
             // 
             this.getColToolStripMenuItem.Name = "getColToolStripMenuItem";
-            this.getColToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.getColToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.getColToolStripMenuItem.Text = "仅留当前列";
             this.getColToolStripMenuItem.Click += new System.EventHandler(this.getColToolStripMenuItem_Click);
             // 
@@ -523,6 +529,45 @@
             // ContentPanel
             // 
             this.ContentPanel.Size = new System.Drawing.Size(352, 177);
+            // 
+            // moveRowColToolStripMenuItem
+            // 
+            this.moveRowColToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rowMoveUpToolStripMenuItem,
+            this.RowMoveDownToolStripMenuItem,
+            this.colMoveLeftToolStripMenuItem,
+            this.colMoveRightToolStripMenuItem});
+            this.moveRowColToolStripMenuItem.Name = "moveRowColToolStripMenuItem";
+            this.moveRowColToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.moveRowColToolStripMenuItem.Text = "行列移动";
+            // 
+            // rowMoveUpToolStripMenuItem
+            // 
+            this.rowMoveUpToolStripMenuItem.Name = "rowMoveUpToolStripMenuItem";
+            this.rowMoveUpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rowMoveUpToolStripMenuItem.Text = "行上移";
+            this.rowMoveUpToolStripMenuItem.Click += new System.EventHandler(this.rowMoveUpToolStripMenuItem_Click);
+            // 
+            // RowMoveDownToolStripMenuItem
+            // 
+            this.RowMoveDownToolStripMenuItem.Name = "RowMoveDownToolStripMenuItem";
+            this.RowMoveDownToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.RowMoveDownToolStripMenuItem.Text = "行下移";
+            this.RowMoveDownToolStripMenuItem.Click += new System.EventHandler(this.RowMoveDownToolStripMenuItem_Click);
+            // 
+            // colMoveLeftToolStripMenuItem
+            // 
+            this.colMoveLeftToolStripMenuItem.Name = "colMoveLeftToolStripMenuItem";
+            this.colMoveLeftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.colMoveLeftToolStripMenuItem.Text = "列左移";
+            this.colMoveLeftToolStripMenuItem.Click += new System.EventHandler(this.colMoveLeftToolStripMenuItem_Click);
+            // 
+            // colMoveRightToolStripMenuItem
+            // 
+            this.colMoveRightToolStripMenuItem.Name = "colMoveRightToolStripMenuItem";
+            this.colMoveRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.colMoveRightToolStripMenuItem.Text = "列右移";
+            this.colMoveRightToolStripMenuItem.Click += new System.EventHandler(this.colMoveRightToolStripMenuItem_Click);
             // 
             // MatrixGenerator
             // 
@@ -596,6 +641,11 @@
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
         private System.Windows.Forms.ToolStripMenuItem getRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getColToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveRowColToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rowMoveUpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RowMoveDownToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colMoveLeftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colMoveRightToolStripMenuItem;
 
     }
 }

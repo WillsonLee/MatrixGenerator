@@ -1782,11 +1782,18 @@ namespace MatrixGenerator
             row_sel = matrixDataGridView.CurrentCell.RowIndex;
             col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
             Matrix matrix_temp = new Matrix(CurrentMatrix);
-            if (row_sel > 0 && row_sel < CurrentMatrix.Rows && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
+            if (row_sel >= 0 && row_sel < CurrentMatrix.Rows && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
             {
-                for (int i = 0; i < CurrentMatrix.Columns; i++)
+                if (row_sel != 0)
                 {
-                    matrix_temp[row_sel - 1, i] = matrix_temp[row_sel, i];
+                    for (int i = 0; i < CurrentMatrix.Columns; i++)
+                    {
+                        matrix_temp[row_sel - 1, i] = matrix_temp[row_sel, i];
+                    }
+                }
+                else
+                {
+                    matrix_temp = Matrix.InsertRow(matrix_temp, Matrix.GetRowVector(matrix_temp, 0), 0);
                 }
                 CurrentMatrix = matrix_temp;
             }
@@ -1798,11 +1805,18 @@ namespace MatrixGenerator
             row_sel = matrixDataGridView.CurrentCell.RowIndex;
             col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
             Matrix matrix_temp = new Matrix(CurrentMatrix);
-            if (row_sel >= 0 && row_sel < (CurrentMatrix.Rows - 1) && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
+            if (row_sel >= 0 && row_sel < CurrentMatrix.Rows && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
             {
-                for (int i = 0; i < CurrentMatrix.Columns; i++)
+                if (row_sel != (CurrentMatrix.Rows - 1))
                 {
-                    matrix_temp[row_sel + 1, i] = matrix_temp[row_sel, i];
+                    for (int i = 0; i < CurrentMatrix.Columns; i++)
+                    {
+                        matrix_temp[row_sel + 1, i] = matrix_temp[row_sel, i];
+                    }
+                }
+                else
+                {
+                    matrix_temp = Matrix.AddRow(matrix_temp, Matrix.GetRowVector(matrix_temp, matrix_temp.Rows - 1));
                 }
                 CurrentMatrix = matrix_temp;
             }
@@ -1814,11 +1828,18 @@ namespace MatrixGenerator
             row_sel = matrixDataGridView.CurrentCell.RowIndex;
             col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
             Matrix matrix_temp = new Matrix(CurrentMatrix);
-            if (row_sel >= 0 && row_sel < CurrentMatrix.Rows && col_sel > 0 && col_sel < CurrentMatrix.Columns)
+            if (row_sel >= 0 && row_sel < CurrentMatrix.Rows && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
             {
-                for (int i = 0; i < CurrentMatrix.Rows; i++)
+                if (col_sel != 0)
                 {
-                    matrix_temp[i, col_sel - 1] = matrix_temp[i, col_sel];
+                    for (int i = 0; i < CurrentMatrix.Rows; i++)
+                    {
+                        matrix_temp[i, col_sel - 1] = matrix_temp[i, col_sel];
+                    }
+                }
+                else
+                {
+                    matrix_temp = Matrix.InsertCol(matrix_temp, Matrix.GetColVector(matrix_temp, 0), 0);
                 }
                 CurrentMatrix = matrix_temp;
             }
@@ -1830,12 +1851,71 @@ namespace MatrixGenerator
             row_sel = matrixDataGridView.CurrentCell.RowIndex;
             col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
             Matrix matrix_temp = new Matrix(CurrentMatrix);
+            if (row_sel >= 0 && row_sel < CurrentMatrix.Rows && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
+            {
+                if (col_sel != (CurrentMatrix.Columns - 1))
+                {
+                    for (int i = 0; i < CurrentMatrix.Rows; i++)
+                    {
+                        matrix_temp[i, col_sel + 1] = matrix_temp[i, col_sel];
+                    }
+                }
+                else
+                {
+                    matrix_temp = Matrix.AddCol(matrix_temp, Matrix.GetColVector(matrix_temp, matrix_temp.Columns - 1));
+                }
+                CurrentMatrix = matrix_temp;
+            }
+        }
+
+        private void rowMoveUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int row_sel, col_sel;
+            row_sel = matrixDataGridView.CurrentCell.RowIndex;
+            col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
+            Matrix matrix_temp = new Matrix(CurrentMatrix);
+            if (row_sel > 0 && row_sel < CurrentMatrix.Rows && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
+            {
+                matrix_temp = Matrix.RowSwitch(matrix_temp, row_sel, row_sel - 1);
+                CurrentMatrix = matrix_temp;
+            }
+        }
+
+        private void RowMoveDownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int row_sel, col_sel;
+            row_sel = matrixDataGridView.CurrentCell.RowIndex;
+            col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
+            Matrix matrix_temp = new Matrix(CurrentMatrix);
+            if (row_sel >= 0 && row_sel < (CurrentMatrix.Rows - 1) && col_sel >= 0 && col_sel < CurrentMatrix.Columns)
+            {
+                matrix_temp = Matrix.RowSwitch(matrix_temp, row_sel, row_sel + 1);
+                CurrentMatrix = matrix_temp;
+            }
+        }
+
+        private void colMoveLeftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int row_sel, col_sel;
+            row_sel = matrixDataGridView.CurrentCell.RowIndex;
+            col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
+            Matrix matrix_temp = new Matrix(CurrentMatrix);
+            if (row_sel >= 0 && row_sel < CurrentMatrix.Rows && col_sel > 0 && col_sel < CurrentMatrix.Columns)
+            {
+                matrix_temp = Matrix.ColumnSwitch(matrix_temp, col_sel, col_sel - 1);
+                CurrentMatrix = matrix_temp;
+            }
+        }
+
+        private void colMoveRightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int row_sel, col_sel;
+            row_sel = matrixDataGridView.CurrentCell.RowIndex;
+            col_sel = matrixDataGridView.CurrentCell.ColumnIndex;
+            Matrix matrix_temp = new Matrix(CurrentMatrix);
             if (row_sel >= 0 && row_sel < CurrentMatrix.Rows && col_sel >= 0 && col_sel < (CurrentMatrix.Columns - 1))
             {
-                for (int i = 0; i < CurrentMatrix.Rows; i++)
-                {
-                    matrix_temp[i, col_sel + 1] = matrix_temp[i, col_sel];
-                }
+                matrix_temp = Matrix.ColumnSwitch(matrix_temp, col_sel, col_sel + 1);
                 CurrentMatrix = matrix_temp;
             }
         }
@@ -2079,6 +2159,5 @@ namespace MatrixGenerator
                 }
             }
         }
-
     }
 }
