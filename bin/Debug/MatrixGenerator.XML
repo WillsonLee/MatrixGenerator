@@ -8,6 +8,12 @@
             <summary>
             矩阵生成器类
             </summary>
+            
+        </member>
+        <member name="F:MatrixGenerator.MatrixGenerator.varNameList">
+            <summary>
+            变量空间的变量名列表
+            </summary>
         </member>
         <member name="M:MatrixGenerator.MatrixGenerator.#ctor">
             <summary>
@@ -44,6 +50,23 @@
         <member name="P:MatrixGenerator.MatrixGenerator.Workspace">
             <summary>
             工作空间中的变量(只读)
+            </summary>
+        </member>
+        <member name="F:MatrixGenerator.VarNameInput.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:MatrixGenerator.VarNameInput.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:MatrixGenerator.VarNameInput.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
     </members>

@@ -14,6 +14,8 @@ namespace MatrixGenerator
     /// <summary>
     /// 矩阵生成器类
     /// </summary>
+    /// 
+    [Serializable]
     public partial class MatrixGenerator: UserControl
     {
         private List<Matrix> workspace = new List<Matrix>();//工作空间保存的矩阵
@@ -129,6 +131,10 @@ namespace MatrixGenerator
             get { return workspace; }
             set{ }
         }
+        /// <summary>
+        /// 变量空间的变量名列表
+        /// </summary>
+        public List<string> varNameList = new List<string>();
 
         /// <summary>
         /// 构造一个矩阵生成器对象
@@ -138,7 +144,7 @@ namespace MatrixGenerator
             InitializeComponent();
             CurrentMatrix = Matrix.Ones(4);
             CurrentMatrix = null;
-            funcToolStripComboBox.SelectedIndex = 0;
+            funcToolStripComboBox.SelectedIndex = 5;
             toolStripStatusLabel1.Text = "就绪...";
         }
 
@@ -493,6 +499,42 @@ namespace MatrixGenerator
                 case 51: break;//Tan
                 case 52: break;//Tanh
                 case 53: break;//Truncate
+                case 54:
+                    #region case54
+                    paraToolStrip.Items.Add(new ToolStripLabel("当前矩阵"));
+                    ToolStripComboBox symbolFun = new ToolStripComboBox();
+                    symbolFun.ComboBox.Width = 5;
+                    symbolFun.ComboBox.Items.Add("+");
+                    symbolFun.ComboBox.Items.Add("-");
+                    symbolFun.ComboBox.Items.Add("*");
+                    symbolFun.ComboBox.Items.Add("/");
+                    symbolFun.ComboBox.Items.Add("\\");
+                    symbolFun.ComboBox.Items.Add("%");
+                    symbolFun.ComboBox.Items.Add(".*");
+                    symbolFun.ComboBox.Items.Add("./");
+                    symbolFun.ComboBox.Items.Add(">");
+                    symbolFun.ComboBox.Items.Add(">=");
+                    symbolFun.ComboBox.Items.Add("<");
+                    symbolFun.ComboBox.Items.Add("<=");
+                    symbolFun.FlatStyle = FlatStyle.Standard;
+                    symbolFun.DropDownStyle = ComboBoxStyle.DropDownList;
+                    symbolFun.SelectedIndex = 0;
+                    paraToolStrip.Items.Add(symbolFun);
+                    ToolStripComboBox rightVal = new ToolStripComboBox();
+                    rightVal.ComboBox.Width = 30;
+                    for (int i = 0; i < workspaceToolStripDropDownButton.DropDownItems.Count; i++)
+                    {
+                        rightVal.Items.Add(workspaceToolStripDropDownButton.DropDownItems[i].Text);
+                    }
+                    if (rightVal.Items.Count > 0)
+                    {
+                        rightVal.SelectedIndex = 0;
+                    }
+                    rightVal.FlatStyle = FlatStyle.Standard;
+                    rightVal.DropDownStyle = ComboBoxStyle.DropDownList;
+                    paraToolStrip.Items.Add(rightVal);
+                    #endregion
+                    break;//符号运算
             }
         }
         //函数实现
@@ -1458,6 +1500,44 @@ namespace MatrixGenerator
                     }
                     break;//Truncate
                     #endregion
+                case 54:
+                #region case54
+                    Matrix rightPara;
+                    try
+                    {
+                        ToolStripComboBox comboTemp54 = (ToolStripComboBox)(paraToolStrip.Items[3]);
+                        rightPara = workspace.ElementAt(comboTemp54.SelectedIndex);
+                    }
+                    catch
+                    {
+                        toolStripStatusLabel1.Text = "参数输入有误!";
+                        break;
+                    }
+                    try
+                    {
+                        ToolStripComboBox comboTemp54 = (ToolStripComboBox)(paraToolStrip.Items[2]);
+                        switch (comboTemp54.SelectedIndex)
+                        {
+                            case 0: CurrentMatrix = this.Add(rightPara); break;
+                            case 1: CurrentMatrix = this.Minus(rightPara); break;
+                            case 2: CurrentMatrix = this.Multiple(rightPara); break;
+                            case 3: CurrentMatrix = this.RightDevide(rightPara); break;
+                            case 4: CurrentMatrix = this.LeftDevide(rightPara); break;
+                            case 5: CurrentMatrix = this.Mod(rightPara); break;
+                            case 6: CurrentMatrix = this.DotMultiple(rightPara); break;
+                            case 7: CurrentMatrix = this.DotDevide(rightPara); break;
+                            case 8: CurrentMatrix = this.MoreThan(rightPara); break;
+                            case 9: CurrentMatrix = this.NotLessThan(rightPara); break;
+                            case 10: CurrentMatrix = this.LessThan(rightPara); break;
+                            case 11: CurrentMatrix = this.NotMoreThan(rightPara); break;
+                        }
+                    }
+                    catch
+                    {
+                        toolStripStatusLabel1.Text = "函数调用出错!";
+                    }
+                    break;//符号运算
+                #endregion
             }
         }
         //函数描述
@@ -1519,7 +1599,57 @@ namespace MatrixGenerator
                 case 51: toolStripStatusLabel1.Text = "当前命令将当前矩阵所有元素求正切值"; break;//Tan
                 case 52: toolStripStatusLabel1.Text = "当前命令将当前矩阵所有元素求正切双曲函数值"; break;//Tanh
                 case 53: toolStripStatusLabel1.Text = "当前命令将当前矩阵所有元素求整数部分"; break;//Truncate
+                case 54: toolStripStatusLabel1.Text = "当前命令将计算相应二目符号运算结果"; break;//符号运算
             }
+        }
+        //符号运算辅助
+        private Matrix Add(Matrix right)
+        {
+            return currentMatrix + right;
+        }
+        private Matrix Minus(Matrix right)
+        {
+            return currentMatrix - right;
+        }
+        private Matrix Multiple(Matrix right)
+        {
+            return currentMatrix * right;
+        }
+        private Matrix RightDevide(Matrix right)
+        {
+            return currentMatrix / right;
+        }
+        private Matrix LeftDevide(Matrix right)
+        {
+            return Matrix.Reverse(currentMatrix) * right;
+        }
+        private Matrix Mod(Matrix right)
+        {
+            return currentMatrix % right;
+        }
+        private Matrix DotMultiple(Matrix right)
+        {
+            return Matrix.DotMultiple(currentMatrix, right);
+        }
+        private Matrix DotDevide(Matrix right)
+        {
+            return Matrix.DotDevide(currentMatrix, right);
+        }
+        private Matrix MoreThan(Matrix right)
+        {
+            return currentMatrix > right;
+        }
+        private Matrix NotLessThan(Matrix right)
+        {
+            return currentMatrix >= right;
+        }
+        private Matrix LessThan(Matrix right)
+        {
+            return currentMatrix < right;
+        }
+        private Matrix NotMoreThan(Matrix right)
+        {
+            return currentMatrix <= right;
         }
         //参数工具栏控件的事件监听
         private void Reset_case1_checkedChanged(object sender, EventArgs e)
@@ -1846,11 +1976,25 @@ namespace MatrixGenerator
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
-            workspaceToolStripDropDownButton.DropDownItems.Add("矩阵" + Convert.ToString(workspace.Count));
-            workspace.Add(new Matrix(currentMatrix));
-            workspaceToolStripDropDownButton.DropDownItems[workspaceToolStripDropDownButton.DropDownItems.Count - 1].Click 
-                += new System.EventHandler(this.toolStripMenuItem2_Click);//增加事件处理
-            toolStripStatusLabel1.Text = "当前矩阵" + Convert.ToString(workspace.Count - 1) + "已存入工作空间...";
+            VarNameInput varName = new VarNameInput();
+            if (varName.ShowDialog() == DialogResult.OK)
+            {
+                if (varName.nameTextBox.Text != "")
+                {
+                    workspaceToolStripDropDownButton.DropDownItems.Add(varName.nameTextBox.Text);
+                    varNameList.Add(varName.nameTextBox.Text);
+                }
+                else
+                {
+                    workspaceToolStripDropDownButton.DropDownItems.Add("矩阵" + workspace.Count.ToString());
+                    varNameList.Add(varName.nameTextBox.Text);
+                }
+                workspace.Add(new Matrix(currentMatrix));
+                workspaceToolStripDropDownButton.DropDownItems[workspaceToolStripDropDownButton.DropDownItems.Count - 1].Click
+                    += new System.EventHandler(this.toolStripMenuItem2_Click);//增加事件处理
+                toolStripStatusLabel1.Text = workspaceToolStripDropDownButton.DropDownItems[workspace.Count - 1].Text
+                                                + "已存入工作空间...";
+            }
         }
 
         private void funcToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1890,6 +2034,7 @@ namespace MatrixGenerator
                 workspaceToolStripDropDownButton.DropDownItems.RemoveAt(0);
             }
             workspace.RemoveRange(0, workspace.Count);
+            varNameList.RemoveRange(0, varNameList.Count);
             SelectedIndex = -1;//取消选中
             toolStripStatusLabel1.Text = "工作空间已清空...";
         }

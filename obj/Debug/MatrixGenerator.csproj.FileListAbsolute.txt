@@ -9,3 +9,4 @@ D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\obj\Debug\MatrixGenerator
 D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\obj\Debug\MatrixGenerator.pdb
 D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\obj\Debug\MatrixGenerator.MatrixGenerator.resources
 D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\bin\Debug\MatrixGenerator.XML
+D:\workdir\VSWorkspace\MatrixGenerator\MatrixGenerator\obj\Debug\MatrixGenerator.VarNameInput.resources
